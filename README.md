@@ -64,4 +64,4 @@ Unlike basic steganography tools that just hide plain text, SMT takes a modern s
 4. **Extraction**: During extraction, data integrity is verified cryptographically before the plaintext is returned. Any tampering with the carrier file that corrupts the ciphertext will raise an explicit tampering alert rather than returning garbage data.
 
 ---
-*Built by [Your Name]*
+*Built by Syed Ahmed Nazeef*
