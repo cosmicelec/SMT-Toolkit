@@ -1,0 +1,5 @@
+cryptography
+pillow
+qrcode
+pypdf
+opencv-python

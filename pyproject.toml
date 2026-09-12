@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smt-cli"
+version = "1.0.0"
+authors = [
+    { name = "SMT Developer", email = "developer@example.com" }
+]
+description = "A powerful, commercial-grade Steganography Multi-Tool (SMT) with authenticated encryption (AES-GCM)."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "cryptography>=41.0.0",
+    "pillow>=10.0.0",
+    "qrcode[pil]>=7.4.2",
+    "pypdf>=3.17.0",
+    "opencv-python>=4.8.0",
+    "rich>=13.0.0"
+]
+
+[project.scripts]
+smt = "smt.main:main"

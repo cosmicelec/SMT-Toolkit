@@ -1,0 +1,2 @@
+[console_scripts]
+smt = smt.main:main

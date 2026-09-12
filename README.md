@@ -1,0 +1,67 @@
+# Steganography Multi-Tool (SMT) 🕵️‍♂️🔒
+
+[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Security](https://img.shields.io/badge/Security-AES--GCM-success.svg)](#)
+
+A powerful, commercial-grade Steganography Multi-Tool with AES-GCM authenticated encryption. Hide your secrets in plain sight using Images, Audio, Text, PDFs, QR Codes, and Git Commits.
+
+## ✨ Features
+
+- **Military-Grade Security**: Uses AES-GCM (Galois/Counter Mode) authenticated encryption via `cryptography` to ensure data confidentiality and prevent tampering.
+- **Image & Audio Steganography**: Seamlessly embed encrypted payloads into LSBs (Least Significant Bits) of images or audio frames.
+- **PDF Metadata Steganography**: Inject encrypted binaries safely into custom PDF dictionaries (`/StegoData`) without altering the visible document.
+- **QR Code Embedding**: Appends payload into target URLs as URL-safe base64 fragments inside High-Error-Correction QR codes.
+- **Git Commit Steganography**: Utilizes Zero-Width Spaces (ZWSP) and Zero-Width Non-Joiners (ZWNJ) to hide invisible encrypted payloads inside the commit messages of any Git repository.
+- **Capacity Analysis**: Built-in capacity reporting to calculate exactly how many bytes you can safely hide in a target file.
+
+## 🚀 Installation
+
+Ensure you have Python 3.10+ installed, then install the package directly via pip:
+
+```bash
+git clone https://github.com/yourusername/smt.git
+cd smt
+pip install -e .
+```
+
+This will make the `smt` command globally available in your terminal!
+
+## 📖 Usage Examples
+
+### 1. Git Commit Steganography
+Hide an invisible payload inside your latest commit message:
+```bash
+smt git encode --payload "Top Secret Architecture" --password "super_secure_pass"
+smt git decode --password "super_secure_pass"
+```
+
+### 2. QR Code Steganography
+Embed an encrypted payload inside a QR code linking to a harmless URL:
+```bash
+smt qr encode --url "https://google.com" --payload "Hidden Coordinates" --password "pass123" --out qr.png
+smt qr decode --file qr.png --password "pass123"
+```
+
+### 3. PDF Steganography
+Store encrypted payloads inside invisible PDF metadata keys:
+```bash
+smt pdf encode --file presentation.pdf --payload "Financial Data" --password "pass123" --out presentation_stego.pdf
+smt pdf decode --file presentation_stego.pdf --password "pass123"
+```
+
+### 4. Check File Capacity
+```bash
+smt report --file my_image.jpg
+# Output: Image Capacity for my_image.jpg: 12450 bytes
+```
+
+## 🧠 Architecture & Security
+Unlike basic steganography tools that just hide plain text, SMT takes a modern security-first approach:
+1. **Derivation**: User passwords are run through PBKDF2HMAC (SHA256, 200,000 iterations) with a randomly generated 16-byte salt to derive a 256-bit key.
+2. **Authenticated Encryption**: The secret payload is encrypted using `AES-GCM` with a 12-byte random nonce, providing both secrecy and authenticity.
+3. **Packaging**: The salt, nonce, and ciphertext are concatenated and passed to the chosen steganography module for embedding into the carrier medium.
+4. **Extraction**: During extraction, data integrity is verified cryptographically before the plaintext is returned. Any tampering with the carrier file that corrupts the ciphertext will raise an explicit tampering alert rather than returning garbage data.
+
+---
+*Built by [Your Name]*
